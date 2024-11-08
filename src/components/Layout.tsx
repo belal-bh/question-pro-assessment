@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,9 +10,15 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`min-h-screen transition-colors duration-200
+      ${theme === 'dark' 
+        ? 'bg-dark-primary text-dark-text' 
+        : 'bg-white text-gray-900'
+      }`}
+    >
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 bg-gray-900 text-white h-16 shadow-xl z-50">
         <div className="container mx-auto px-6 h-full">

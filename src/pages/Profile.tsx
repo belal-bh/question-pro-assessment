@@ -8,8 +8,8 @@ function Profile() {
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
-    language: user.preferences.language,
-    theme: user.preferences.theme,
+    language: user.preferences?.language ?? 'en',
+    theme: user.preferences?.theme ?? 'light',
   });
   const [isSaving, setIsSaving] = useState(false);
 

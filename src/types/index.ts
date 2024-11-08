@@ -14,4 +14,6 @@ export interface Component {
   type?: string;
   framework?: string;
   description?: string;
-} 
+}
+
+export type Theme = 'light' | 'dark'; 

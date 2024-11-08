@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { useUser } from '@/contexts/UserContext';
-import MyButton from './MyButton';
 
 const Navbar = () => {
   const { user } = useUser();
@@ -44,15 +43,9 @@ const Navbar = () => {
             <NavLink to="/profile">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                  {user.avatar ? (
-                    <img 
-                      src={user.avatar} 
-                      alt={user.name} 
-                      className="w-8 h-8 rounded-full"
-                    />
-                  ) : (
+                  {(
                     <span className="text-sm font-medium text-gray-600">
-                      {user.name.charAt(0)}
+                      {user?.name?.charAt(0) || '?'}
                     </span>
                   )}
                 </div>

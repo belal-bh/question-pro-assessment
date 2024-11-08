@@ -1,16 +1,6 @@
-import { createContext, useContext, ReactNode, useState } from 'react';
-
-interface UserPreferences {
-  theme: 'light' | 'dark';
-  language: string;
-}
-
-interface User {
-  name: string;
-  email: string;
-  avatar: string | null;
-  preferences: UserPreferences;
-}
+import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
+import { useTheme } from './ThemeContext';
+import { User } from '@/types';
 
 interface UserContextType {
   user: User;
@@ -20,19 +10,29 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User>({
-    name: 'John Doe',
-    email: 'john@example.com',
-    avatar: null,
-    preferences: {
-      theme: 'light',
-      language: 'en',
-    }
+  const { theme, toggleTheme } = useTheme();
+  const [user, setUser] = useState<User>(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : {
+      name: 'Belal Hossain',
+      email: 'belal.cseai@gmail.com',
+      avatar: null,
+      preferences: {
+        theme: theme,
+        language: 'en',
+      }
+    };
   });
 
   const updateUser = (updates: Partial<User>) => {
     setUser(prev => {
       const newUser = { ...prev, ...updates };
+      
+      // If theme preference is updated, toggle theme
+      if (updates.preferences?.theme && updates.preferences.theme !== prev.preferences?.theme) {
+        toggleTheme();
+      }
+      
       localStorage.setItem('user', JSON.stringify(newUser));
       return newUser;
     });

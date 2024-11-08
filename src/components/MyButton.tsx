@@ -4,6 +4,8 @@ interface MyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
+type DivProps = Omit<MyButtonProps, keyof ButtonHTMLAttributes<HTMLButtonElement>>;
+
 const MyButton: React.FC<MyButtonProps> = ({ 
   children, 
   className = '',
@@ -51,7 +53,7 @@ const MyButton: React.FC<MyButtonProps> = ({
   };
 
   return (
-    <div className={className} {...props}>
+    <div className={className} {...(props as DivProps)}>
       {processChildren(children)[0]}
     </div>
   );

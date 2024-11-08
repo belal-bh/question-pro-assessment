@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background-light: #ffffff;
+  --background-dark: #1a1a1a;
+  --text-light: #1a1a1a;
+  --text-dark: #ffffff;
+}
+
+/* Dark mode styles */
+.dark {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* Light mode styles */
+.light {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
+
+/* Smooth transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

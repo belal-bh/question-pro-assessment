@@ -7,15 +7,6 @@ const UserProfile = () => {
     <aside className="fixed right-0 top-16 h-[calc(100vh-4rem)] w-80 bg-white border-l border-gray-200 overflow-y-auto">
       <div className="p-6">
         <div className="text-center">
-          <div className="relative inline-block">
-            <img
-              src={user.avatar || 'https://via.placeholder.com/96'}
-              alt="Profile"
-              className="h-24 w-24 rounded-full border-2 border-gray-200"
-            />
-            <span className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-green-400 border-2 border-white" />
-          </div>
-          
           <h3 className="mt-4 text-lg font-semibold text-gray-900">{user.name}</h3>
           <p className="text-sm text-gray-500">{user.email}</p>
         </div>
