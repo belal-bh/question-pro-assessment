@@ -35,11 +35,11 @@ A React-based dashboard application demonstrating modern web development practic
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/questionpro-assessment.git
+git clone https://github.com/belal-bh/question-pro-assessment.git
 ```
 
 2. Install dependencies:
 
 ```bash
-cd questionpro-assessment
+cd question-pro-assessment
 ```
