@@ -1,23 +1,29 @@
-import { Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
-import Components from './pages/Components';
-import Profile from './pages/Profile';
-import Posts from './pages/dashboard/Posts';
-import Comments from './pages/dashboard/Comments';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { lazy } from 'react';
+import ErrorBoundary from './components/ErrorBoundary';
+
+// Lazy load components
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Home = lazy(() => import('./pages/Home'));
+const Components = lazy(() => import('./pages/Components'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Posts = lazy(() => import('./pages/dashboard/Posts'));
+const Comments = lazy(() => import('./pages/dashboard/Comments'));
 
 function AppRoutes() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/dashboard" element={<Dashboard />}>
-        <Route index element={<Posts />} />
-        <Route path="posts" element={<Posts />} />
-        <Route path="comments" element={<Comments />} />
-      </Route>
-      <Route path="/components" element={<Components />} />
-      <Route path="/profile" element={<Profile />} />
-    </Routes>
+    <ErrorBoundary>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<Navigate to="posts" replace />} />
+          <Route path="posts" element={<Posts />} />
+          <Route path="comments" element={<Comments />} />
+        </Route>
+        <Route path="/components" element={<Components />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </ErrorBoundary>
   );
 }
 
